@@ -9,10 +9,12 @@ To use, simply set your page up as you would for the Masonry plugin. Include the
 
 * Note: This plugin does require jQuery to work.
 
+    ```
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>    
     <script type="text/javascript" src="javascripts/imagesLoaded.js"></script>
     <script type="text/javascript" src="javascripts/masonry-3.1.4.js"></script>
     <script type="text/javascript" src="javascripts/masonry.filter.js"></script>
+    ```
 
 Again, set up your initialization scripts as you would for the masonry plugin:
 
