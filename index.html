@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Simple masonry filter : Inspired by multiple-filter-masonry, extends the masonry plugin by David DeSandro adding the ability to filter items via a callback filter method." />
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    
+    <title>Simple masonry filter</title>
+    
+    <style type="text/css">
+        pre {
+            margin-bottom: 20px;
+        }
+
+         #main_content {
+             margin-bottom: 50px;
+         }
+
+        #masonry {
+            overflow: hidden;
+        } 
+
+        .filters {
+            margin-bottom: 20px;
+        }
+        
+        .card-container {
+            margin-bottom: 15px;
+        }
+        
+        .card {
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #999;
+            border-radius: 8px;
+            box-shadow: 0 0 5px -1px rgba(0, 0, 0, .85);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner container">
+            <a id="forkme_banner" href="https://github.com/mikethedarv/Simple masonry filter">View on GitHub</a>
+
+            <h1 id="project_title">Simple masonry filter</h1>
+            <h2 id="project_tagline">Inspired by multiple-filter-masonry, extends the <a href="http://masonry.desandro.com/" target="_blank">masonry plugin</a> by david desandro adding the ability to filter items via a callback filter method.</h2>
+
+            <section id="downloads">
+                <a class="zip_download_link" href="https://github.com/mikethedarv/Simple masonry filter/zipball/master">Download this project as a .zip file</a>
+                <a class="tar_download_link" href="https://github.com/mikethedarv/Simple masonry filter/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+        <section id="main_content" class="inner container">
+            <h2>
+                Usage
+            </h2>
+
+            <p>
+                To use, simply set your page up as you would for the Masonry plugin.  Include the masonry filter plugin after the masonry javascript:
+            </p>
+
+            <p>
+                <strong>* Note:</strong>  This plugin does require jQuery to work.
+            </p>
+            
+            <pre><code>&lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="javascripts/imagesLoaded.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="javascripts/masonry-3.1.4.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="javascripts/masonry.filter.js"&gt;&lt;/script&gt;</code>
+</pre>
+            
+            <p>
+                Again, set up your initialization scripts as you would for the masonry plugin:
+            </p>
+            
+            <pre><code>var self = $("#masonry");
+self.imagesLoaded(function () {
+    self.masonry({
+        gutterWidth: 15,
+        isAnimated: true,
+        itemSelector: ".card-container"
+    });
+});</code>
+</pre>
+            
+            <p>
+                Finally, to filter, simply call the masonryFilter jQuery function on your masonry container with a <strong>filter</strong> option.  
+                The filter parameter recieves the DOM (jQuery) object as its context (this).  You may use the jQuery object for filtering logic.  The filter
+                function should return true if the item should be shown, false if it should be filtered out.
+            </p>
+            
+            <pre><code>self.masonryFilter({
+    filter: function () {
+        if (!filter) return true;
+        return $(this).attr("data-filter") == &lt;desired filter&gt;;
+    }
+});</code></pre>
+            
+            
+            
+            <h2>
+                Demo
+            </h2>
+
+            <p>
+                Using the <a href="http://www.getbootstrap.com" target="_blank">Twitter Bootstrap</a>, we can achieve a beautiful responsive masonry layout with custom filtering.
+            </p>
+
+            <div class="btn-toolbar filters">
+                <div class="btn-group" data-toggle="buttons">
+                    <label data-filter="" class="btn btn-primary active">
+                        <input type="radio" name="options" id="option1"> All
+                    </label>
+                    <label data-filter="one" class="btn btn-primary">
+                        <input type="radio" name="options" id="option1"> One
+                    </label>
+                    <label data-filter="two" class="btn btn-primary">
+                        <input type="radio" name="options" id="option2"> Two
+                    </label>
+                    <label data-filter="three" class="btn btn-primary">
+                        <input type="radio" name="options" id="option3"> Three
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="masonry">
+                    <div data-filter="one" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <h4>Lorem Ipsum</h4>
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/400/200/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div data-filter="two" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/250/500/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div data-filter="three" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <h4>Lorem Ipsum</h4>
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/300/300/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div data-filter="two" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/250/500/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div data-filter="three" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <h4>Lorem Ipsum</h4>
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/300/300/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div data-filter="one" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <h4>Lorem Ipsum</h4>
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/400/200/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div data-filter="one" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <h4>Lorem Ipsum</h4>
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/400/200/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div data-filter="two" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/250/500/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div data-filter="three" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <h4>Lorem Ipsum</h4>
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/300/300/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div data-filter="two" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/250/500/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div data-filter="three" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <h4>Lorem Ipsum</h4>
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/300/300/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div data-filter="one" class="card-container col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                        <div class="card">
+                            <h4>Lorem Ipsum</h4>
+                            <img class="img-thumbnail img-responsive" src="http://lorempixel.com/400/200/">
+                            <p>
+                                Quisque in ante a dolor interdum hendrerit. Vestibulum eu ipsum at ligula bibendum rutrum. Suspendisse faucibus pulvinar nibh, at iaculis eros venenatis ac.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+        <footer class="inner container">
+            <p class="copyright">Simple masonry filter maintained by <a href="https://github.com/mikethedarv">mikethedarv</a></p>
+            <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+        </footer>
+    </div>
+    
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascripts/imagesLoaded.js"></script>
+    <script type="text/javascript" src="javascripts/masonry-3.1.4.js"></script>
+    <script type="text/javascript" src="javascripts/masonry.filter.js"></script>
+    
+    <script type="text/javascript">
+        $(function () {
+            var self = $("#masonry");
+
+            self.imagesLoaded(function () {
+                self.masonry({
+                    gutterWidth: 15,
+                    isAnimated: true,
+                    itemSelector: ".card-container"
+                });
+            });
+
+            $(".filters .btn").click(function(e) {
+                e.preventDefault();
+
+                var filter = $(this).attr("data-filter");
+
+                self.masonryFilter({
+                    filter: function () {
+                        if (!filter) return true;
+                        return $(this).attr("data-filter") == filter;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
